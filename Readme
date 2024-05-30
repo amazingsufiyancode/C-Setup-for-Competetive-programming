@@ -1,0 +1,96 @@
+Setting Up C++ Compile and Run Tasks in VS Code for Competitive Programmers.
+
+This guide will help you configure tasks in Visual Studio Code to compile and run your C++ programs with input and output files, which is particularly useful for competitive programming.
+
+Steps to Configure Tasks:
+
+1) Open VS Code and navigate to the Terminal menu.
+
+2) Open Configure Tasks:
+
+3) Go to Terminal in the top menu.
+4) Select Configure Tasks....
+5) Create a new task:
+
+In the dropdown that appears, choose Create tasks.json file from template.
+Select Others from the list of task templates.
+Modify tasks.json:
+
+Replace the content of tasks.json with the following configuration:
+
+
+
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile and run",
+      "type": "shell",
+      "command": "",
+      "args": [
+        "copy",
+        "\"${file}\"",
+        "${workspaceFolder}\\jspwTest.cpp",
+        "&&",
+        "g++",
+        "jspwTest.cpp",
+        "-o",
+        "jspwTest",
+        "&&",
+        "jspwTest",
+        "<",
+        "input.txt",
+        ">",
+        "output.txt",
+        "&&",
+        "del",
+        "jspwTest.exe",
+        "&&",
+        "del",
+        "jspwTest.cpp"
+      ],
+      "presentation": {
+        "reveal": "silent"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": {
+        "owner": "cpp",
+        "fileLocation": [
+          "relative",
+          "${workspaceRoot}"
+        ],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+Usage
+Prepare Input File:
+
+1) Create an input.txt file in the same directory as your C++ source file.
+2) Add the necessary input data for your program.
+3) Compile the C++ Program:
+
+4) Open the Command Palette (Ctrl+Shift+B or Cmd+Shift+B on macOS).
+5) Type Tasks: Run Task and select Compile C++.
+6) Run the Program with Input and Output Files:
+
+Open the Command Palette again.
+Type Tasks: Run Task and select Run C++ with Input and Output.
+Check Output:
+Open the output.txt file in the same directory to see the program's output.
